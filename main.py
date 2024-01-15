@@ -1,5 +1,4 @@
 import math
-import numpy as np
 
 import pygame
 from pygame.locals import *
@@ -37,12 +36,14 @@ ground_vertices = (
     (700, 0, -700)
 )
 
+
 def ground():
     glBegin(GL_QUADS)
     for vertex in ground_vertices:
         glColor3fv((0.42, 0.27, 0.26))
         glVertex3fv(vertex)
     glEnd()
+
 
 def sub_tetras(vertices):
     middlepoints = [[(vertices[edge[0]][0] + vertices[edge[1]][0]) / 2,
@@ -55,6 +56,7 @@ def sub_tetras(vertices):
         (vertices[2], middlepoints[1], middlepoints[3], middlepoints[5]),
         (vertices[3], middlepoints[2], middlepoints[4], middlepoints[5])
     ]
+
 
 def main_tetra(vertices, check):
     glBegin(GL_LINES)
@@ -72,6 +74,7 @@ def main_tetra(vertices, check):
                 glVertex3fv(vertices[vertex])
         glEnd()
 
+
 def generating_sub_tetras(vertices, depth, texture_visibility):
     if depth == 0:
         main_tetra(vertices, texture_visibility)
@@ -79,6 +82,7 @@ def generating_sub_tetras(vertices, depth, texture_visibility):
     tetrahedrons = sub_tetras(vertices)
     for tetra in tetrahedrons:
         generating_sub_tetras(tetra, depth - 1, texture_visibility)
+
 
 def main():
     rotation = 1
@@ -150,7 +154,6 @@ def main():
                     else:
                         texture_visibility = 0
 
-
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         ground()
@@ -165,6 +168,5 @@ def main():
         pygame.display.flip()
         pygame.time.wait(20)
 
+
 main()
-
-
