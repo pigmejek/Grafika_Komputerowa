@@ -144,7 +144,7 @@ def main():
                     glTranslatef(0.5, 0, 0)
 
 
-                # control textures
+                # widocznosc tekstur
                 if event.key == pygame.K_t:
                     if texture_visibility == 0:
                         texture_visibility = 1
