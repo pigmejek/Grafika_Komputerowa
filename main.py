@@ -143,7 +143,6 @@ def main():
                 if event.key == pygame.K_RIGHT:
                     glTranslatef(0.5, 0, 0)
 
-
                 # widocznosc tekstur
                 if event.key == pygame.K_t:
                     if texture_visibility == 0:
@@ -151,12 +150,6 @@ def main():
                     else:
                         texture_visibility = 0
 
-                # obrot
-                    if event.key == pygame.K_r:
-                        if rotation == 1:
-                            rotation = 0
-                        else:
-                            rotation = 1
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
