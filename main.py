@@ -72,13 +72,13 @@ def main_tetra(vertices, check):
                 glVertex3fv(vertices[vertex])
         glEnd()
 
-def sierpinski(vertices, depth, texture_visibility):
+def generating_sub_tetras(vertices, depth, texture_visibility):
     if depth == 0:
         main_tetra(vertices, texture_visibility)
         return
     tetrahedrons = sub_tetras(vertices)
     for tetra in tetrahedrons:
-        sierpinski(tetra, depth - 1, texture_visibility)
+        generating_sub_tetras(tetra, depth - 1, texture_visibility)
 
 def main():
     rotation = 1
@@ -99,7 +99,7 @@ def main():
     glMatrixMode(GL_MODELVIEW)
     glTranslatef(0.0, -0.5, -5)
 
-    glLight(GL_LIGHT0, GL_POSITION, (5, 5, 5, 0))
+    glLight(GL_LIGHT0, GL_POSITION, (3, 3, 3, 0))
     glLightfv(GL_LIGHT0, GL_AMBIENT, (1.0, 1.0, 1.0, 1.0))
     glLightfv(GL_LIGHT0, GL_DIFFUSE, (1.0, 1.0, 1.0, 1.0))
     glLightfv(GL_LIGHT0, GL_SPECULAR, (1.0, 1.0, 0.0, 1.0))
@@ -166,7 +166,7 @@ def main():
 
         glPushMatrix()
         glRotatef(rotation_shift, 0, 1, 0)
-        sierpinski(pyramid_vertices, levels, texture_visibility)
+        generating_sub_tetras(pyramid_vertices, levels, texture_visibility)
         glPopMatrix()
 
         pygame.display.flip()
